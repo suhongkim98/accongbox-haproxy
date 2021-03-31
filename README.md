@@ -11,9 +11,13 @@ haproxy 설정파일
 와 같은 형태로 경로를 바인딩해주어 컨테이너 외부의 설정파일을 적용한다. 
 global에 daemon옵션을 주어서 -d옵션을 줘서 백그라운트로 컨테이너를 실행한다.
 
-나는 sudo docker run -d --name my-haproxy -p 80:80 -v /root/haproxy:/usr/local/etc/haproxy haproxy:latest 처럼 포트포워딩을 해주어서 성공했다.
+나의 컨테이너 실행 명령어:
+sudo docker run -d --name my-haproxy --net haproxy-net -p 80:80 -p 443:443 -p 9000:9000 --restart always -v /root/haproxy:/usr/local/etc/haproxy haproxy:latest
+docker 컨테이너간 통신을 하기 위해서는 같은 다커 네트워크 상에 있어야 한다.
+--net 으로 해당 네트워크를 지정해준다.
 
-4. haproxy.cfg 내용이 변경된다고 haproxy서버에 적용되지 않는다.
+
+4. haproxy.cfg 내용이 변경된다고 haproxy서버에 적용되지 않는다. 컨테이너를 재시작 해야한다.
 sudo docker exec -it my-haproxy haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg
-와 같은 꼴로 haproxy.cfg 변경 때마다 검증 수행해서 적용하자.
+와 같은 꼴로 haproxy.cfg 변경 때마다 설정 문법 검증을 수행할 수 있다.
 ```
