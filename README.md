@@ -12,7 +12,7 @@ sudo docker build -t accongbox-haproxy .
 
 ### 3. docker run
 ```
-sudo docker run -d --name my-haproxy --net haproxy-net -p 80:80 -p 443:443 -p 9000:9000 --restart always -v /root/haproxy:/usr/local/etc/haproxy haproxy:latest
+sudo docker run -d --name my-haproxy --net haproxy-net -p 80:80 -p 443:443 -p 9000:9000 --restart always -v {haproxy-디렉토리}:/usr/local/etc/haproxy accongbox-haproxy
 ```
 
 - -v옵션으로 경로를 바인딩해주어 우리가 작성한 설정파일을 사용하도록 한다.
