@@ -1,11 +1,14 @@
 # AccongBox HAProxy 설정파일
 
-### 1. HAProxy 도커 이미지 다운로드 
-먼저 Docker 설치 후 docker pull 명령어로 haproxy를 받아온다.
-
-### 2. HAProxy 설정파일 생성
+### 1. HAProxy 설정파일 생성
 haproxy 설정파일(haproxy.cfg)가 컨테이너가 실행될 때마다 외부 볼륨에서 설정파일을 가져오도록
 홈 디렉토리에 haproxy폴더를 만들고 안에 haproxy.cfg 파일을 만들어 안에 설정을 해준다.
+
+### 2. docker build
+docker 설치 후 명령어를 통해 Dockerfile을 이용하여 이미지를 빌드한다.
+```
+sudo docker build -t accongbox-haproxy .
+```
 
 ### 3. docker run
 ```
